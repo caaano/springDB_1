@@ -41,19 +41,19 @@ class MemberRepositoryV1Test {
         repository.save(member);
 
         //findById
-        Member findMember = repository.findbyId(member.getMemberId());
+        Member findMember = repository.findById(member.getMemberId());
         log.info("findMember={}", findMember);
         log.info("member != findMember");
         assertThat(findMember).isEqualTo(member);
 
         //update: money: 10000 -> 20000
         repository.update(member.getMemberId(), 20000);
-        Member updateMember = repository.findbyId(member.getMemberId());
+        Member updateMember = repository.findById(member.getMemberId());
         assertThat(updateMember.getMoney()).isEqualTo(20000);
 
         //delete
         repository.delete(member.getMemberId());
-        assertThatThrownBy(() -> repository.findbyId(member.getMemberId()))
+        assertThatThrownBy(() -> repository.findById(member.getMemberId()))
                 .isInstanceOf(NoSuchElementException.class);
 
         try {
